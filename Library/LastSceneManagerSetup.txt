@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/Examples/S3Example.unity
+  isLoaded: 1
+  isActive: 1
