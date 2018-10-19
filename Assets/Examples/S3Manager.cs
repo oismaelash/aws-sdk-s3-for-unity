@@ -95,6 +95,20 @@ namespace AWSSDK.Examples
         #region METHODS AWS SDK S3
 
         /// <summary>
+        /// Example method to Demostrate GetBucketList
+        /// </summary>
+        public void ListBuckets(Action<ListBucketsResponse, string> result)
+        {
+            Client.ListBucketsAsync(new ListBucketsRequest(), (responseObject) =>
+            {
+                if (responseObject.Exception == null)
+                    result?.Invoke(responseObject.Response, "");
+                else
+                    result?.Invoke(null, responseObject.Exception.ToString());
+            });
+        }
+
+        /// <summary>
         /// Get Objects from S3 Bucket
         /// </summary>
         public void ListObjectsBucket(string nameBucket, Action<ListObjectsResponse, string> result)

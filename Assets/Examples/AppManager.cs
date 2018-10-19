@@ -12,6 +12,7 @@ namespace AWSSDK.Examples
         [Tooltip("Path and FileName with Extesion. E.G Documents/file.txt")] [SerializeField] private string pathFileUpload;
 
         [Header("Buttons")]
+        [SerializeField] private Button buttonListBuckets;
         [SerializeField] private Button buttonListFilesBucket;
         [SerializeField] private Button buttonGetFileBucket;
         [SerializeField] private Button buttonUploadFileBucket;
@@ -20,12 +21,37 @@ namespace AWSSDK.Examples
 
         void Start()
         {
+            buttonListBuckets.onClick.AddListener(() => { ListBuckets(); });
             buttonListFilesBucket.onClick.AddListener(() => { ListObjectsBucket(); });
             buttonGetFileBucket.onClick.AddListener(() => { GetObjectBucket(); });
             buttonUploadFileBucket.onClick.AddListener(() => { UploadObjectForBucket(pathFileUpload, S3BucketName, fileNameOnBucket); });
             buttonDeleteFileBucket.onClick.AddListener(() => { DeleteObjectOnBucket(); });
 
             S3Manager.Instance.OnResultGetObject += GetObjectBucket;
+        }
+
+        private void ListBuckets()
+        {
+            resultTextOperation.text = "Fetching all the Buckets";
+
+            S3Manager.Instance.ListBuckets((result, error) =>
+            {
+                resultTextOperation.text += "\n";
+                if (string.IsNullOrEmpty(error))
+                {
+                    resultTextOperation.text += "Got Response \nPrinting now \n";
+
+                    result.Buckets.ForEach((s3b) =>
+                    {
+                        resultTextOperation.text += string.Format("bucket = {0}\n", s3b.BucketName);
+                    });
+                }
+                else
+                {
+                    print("Get Error:: " + error);
+                    resultTextOperation.text += "Got Exception \n";
+                }
+            });
         }
 
         private void ListObjectsBucket()
