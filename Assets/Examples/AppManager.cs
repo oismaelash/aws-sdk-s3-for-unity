@@ -6,6 +6,8 @@ namespace AWSSDK.Examples
 {
     public class AppManager : MonoBehaviour
     {
+        #region VARIABLES 
+
         [Header("Infos")]
         [SerializeField] private string S3BucketName;
         [Tooltip("FileName with Extesion. E.G file.txt")] [SerializeField] private string fileNameOnBucket;
@@ -19,6 +21,10 @@ namespace AWSSDK.Examples
         [SerializeField] private Button buttonDeleteFileBucket;
         [SerializeField] private Text resultTextOperation;
 
+        #endregion
+
+        #region METHODS MONOBEHAVIOUR
+
         void Start()
         {
             buttonListBuckets.onClick.AddListener(() => { ListBuckets(); });
@@ -30,6 +36,10 @@ namespace AWSSDK.Examples
             S3Manager.Instance.OnResultGetObject += GetObjectBucket;
         }
 
+        #endregion
+
+        #region METHODS CREATED
+
         private void ListBuckets()
         {
             resultTextOperation.text = "Fetching all the Buckets";
@@ -37,13 +47,14 @@ namespace AWSSDK.Examples
             S3Manager.Instance.ListBuckets((result, error) =>
             {
                 resultTextOperation.text += "\n";
+
                 if (string.IsNullOrEmpty(error))
                 {
                     resultTextOperation.text += "Got Response \nPrinting now \n";
 
-                    result.Buckets.ForEach((s3b) =>
+                    result.Buckets.ForEach((bucket) =>
                     {
-                        resultTextOperation.text += string.Format("bucket = {0}\n", s3b.BucketName);
+                        resultTextOperation.text += string.Format("bucket = {0}\n", bucket.BucketName);
                     });
                 }
                 else
@@ -64,9 +75,9 @@ namespace AWSSDK.Examples
                 if (string.IsNullOrEmpty(error))
                 {
                     resultTextOperation.text += "Got Response \nPrinting now \n";
-                    result.S3Objects.ForEach((o) =>
+                    result.S3Objects.ForEach((file) =>
                     {
-                        resultTextOperation.text += string.Format("File: {0}\n", o.Key);
+                        resultTextOperation.text += string.Format("File: {0}\n", file.Key);
                     });
                 }
                 else
@@ -142,5 +153,7 @@ namespace AWSSDK.Examples
                 }
             });
         }
+
+        #endregion
     }
 }

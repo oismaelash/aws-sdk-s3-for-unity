@@ -849,14 +849,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d44f4b2c66ee74175bd5454b61ae92a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rawImageShowImage: {fileID: 0}
-  inputFieldPathImage: {fileID: 0}
-  rawImageShowVideo: {fileID: 0}
-  inputFieldPathVideo: {fileID: 0}
-  videoPlayer: {fileID: 0}
-  pathInput: 
-  pathOutput: 
-  urlInput: 
 --- !u!1 &643000390
 GameObject:
   m_ObjectHideFlags: 0
@@ -1057,7 +1049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fa7de8866404054591507da4f1293de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  identityPoolId: us-east-1:9b3b886c-484f-4610-a557-8894349ec52b
+  identityPoolId: 
   cognitoIdentityRegion: us-east-1
   s3Region: us-east-1
 --- !u!4 &925414697

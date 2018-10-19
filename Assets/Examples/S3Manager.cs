@@ -78,7 +78,7 @@ namespace AWSSDK.Examples
 
         #region METHODS MONOBEHAVIOUR
 
-        private void Awake()
+        void Awake()
         {
             Instance = this;
         }
@@ -144,7 +144,6 @@ namespace AWSSDK.Examples
             Client.GetObjectAsync(request, (responseObj) =>
             {
                 var response = responseObj.Response;
-
                 if (response.ResponseStream != null)
                 {
                     result?.Invoke(responseObj.Response, "");

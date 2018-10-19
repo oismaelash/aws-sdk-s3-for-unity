@@ -20,13 +20,13 @@ namespace AWSSDK.Examples
             }
         }
 
-        public static void ConvertBytesForFile(Stream responseStream, string pathOutputFile = "C:/", string fileNameWithExtesion = "file.txt")
+        public static void ConvertObjectS3ForFile(Stream responseStream, string pathOutputFile = "C:/", string fileNameWithExtesion = "file.txt")
         {
             var bytesFile = GetBytesFile(responseStream);
             File.WriteAllBytes(string.Format("{0}{1}", pathOutputFile, fileNameWithExtesion), bytesFile);
         }
 
-        public static void ConvertBytesForFile(byte[] bytesFile, string pathOutputFile = "C:/", string fileNameWithExtesion = "file.txt")
+        public static void ConvertObjectS3ForFile(byte[] bytesFile, string pathOutputFile = "C:/", string fileNameWithExtesion = "file.txt")
         {
             File.WriteAllBytes(string.Format("{0}{1}", pathOutputFile, fileNameWithExtesion), bytesFile);
         }

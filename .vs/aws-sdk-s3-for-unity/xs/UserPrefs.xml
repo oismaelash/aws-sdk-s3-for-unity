@@ -1,0 +1,15 @@
+﻿<Properties StartupConfiguration="{34FB5E87-DD01-CE9C-90E0-F41483F5D352}|">
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Examples/AppManager.cs">
+    <Files>
+      <File FileName="Assets/Examples/AppManager.cs" Line="91" Column="80" />
+      <File FileName="Assets/Examples/S3Manager.cs" Line="114" Column="101" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>
