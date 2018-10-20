@@ -6,8 +6,8 @@ IAM Role Acess Full S3
     "Statement": [
         {
             "Effect": "Allow",
-            "Action": "s3:*",
-            "Resource": "*"
+            "Action": "s3:\*",
+            "Resource": "\*"
         }
     ]
 }
