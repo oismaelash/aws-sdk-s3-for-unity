@@ -13,3 +13,5 @@ IAM Role Acess Full S3
 }
 
 Set Role up, on Identity pool Auth or Unauth
+
+Video show how use: 
