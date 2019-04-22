@@ -1,4 +1,4 @@
-﻿using Amazon.S3.Model;
+using Amazon.S3.Model;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,26 +6,63 @@ namespace AWSSDK.Examples
 {
     public class AppManager : MonoBehaviour
     {
+        #region VARIABLES 
+
         [Header("Infos")]
         [SerializeField] private string S3BucketName;
         [Tooltip("FileName with Extesion. E.G file.txt")] [SerializeField] private string fileNameOnBucket;
         [Tooltip("Path and FileName with Extesion. E.G Documents/file.txt")] [SerializeField] private string pathFileUpload;
 
         [Header("Buttons")]
+        [SerializeField] private Button buttonListBuckets;
         [SerializeField] private Button buttonListFilesBucket;
         [SerializeField] private Button buttonGetFileBucket;
         [SerializeField] private Button buttonUploadFileBucket;
         [SerializeField] private Button buttonDeleteFileBucket;
         [SerializeField] private Text resultTextOperation;
 
+        #endregion
+
+        #region METHODS MONOBEHAVIOUR
+
         void Start()
         {
+            buttonListBuckets.onClick.AddListener(() => { ListBuckets(); });
             buttonListFilesBucket.onClick.AddListener(() => { ListObjectsBucket(); });
             buttonGetFileBucket.onClick.AddListener(() => { GetObjectBucket(); });
             buttonUploadFileBucket.onClick.AddListener(() => { UploadObjectForBucket(pathFileUpload, S3BucketName, fileNameOnBucket); });
             buttonDeleteFileBucket.onClick.AddListener(() => { DeleteObjectOnBucket(); });
 
             S3Manager.Instance.OnResultGetObject += GetObjectBucket;
+        }
+
+        #endregion
+
+        #region METHODS CREATED
+
+        private void ListBuckets()
+        {
+            resultTextOperation.text = "Fetching all the Buckets";
+
+            S3Manager.Instance.ListBuckets((result, error) =>
+            {
+                resultTextOperation.text += "\n";
+
+                if (string.IsNullOrEmpty(error))
+                {
+                    resultTextOperation.text += "Got Response \nPrinting now \n";
+
+                    result.Buckets.ForEach((bucket) =>
+                    {
+                        resultTextOperation.text += string.Format("bucket = {0}\n", bucket.BucketName);
+                    });
+                }
+                else
+                {
+                    print("Get Error:: " + error);
+                    resultTextOperation.text += "Got Exception \n";
+                }
+            });
         }
 
         private void ListObjectsBucket()
@@ -38,10 +75,15 @@ namespace AWSSDK.Examples
                 if (string.IsNullOrEmpty(error))
                 {
                     resultTextOperation.text += "Got Response \nPrinting now \n";
-                    result.S3Objects.ForEach((o) =>
+                    foreach (var file in result.S3Objects)
                     {
-                        resultTextOperation.text += string.Format("File: {0}\n", o.Key);
-                    });
+                        string nameObject = file.Key.Split('/')[file.Key.Split('/').Length - 1];
+
+                        if (string.IsNullOrEmpty(file.Key.Split('/')[file.Key.Split('/').Length - 1]))
+                            resultTextOperation.text += string.Format("Folder: {0}\n", file.Key);
+
+                        resultTextOperation.text += string.Format("File: {0}\n", file.Key);
+                    }
                 }
                 else
                 {
@@ -116,5 +158,7 @@ namespace AWSSDK.Examples
                 }
             });
         }
+
+        #endregion
     }
 }
