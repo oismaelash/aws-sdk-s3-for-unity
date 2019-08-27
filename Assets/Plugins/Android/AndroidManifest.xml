@@ -32,7 +32,7 @@
       android:label="@string/app_name"
       android:debuggable="true">
 
-    <activity android:name="com.unity3d.player.UnityPlayerNativeActivity"
+    <activity android:name="com.unity3d.player.UnityPlayerActivity"
               android:label="@string/app_name">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
